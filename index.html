@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社プロフェッショナル・コンサルティング</title>
+  <style>
+    /* グローバルスタイル */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    
+    body {
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #000;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+    
+    /* ヘッダースタイル */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .logo span {
+      color: #000;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      position: relative;
+      font-weight: 500;
+    }
+    
+    nav ul li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #000;
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    
+    nav ul li a:hover:after {
+      width: 100%;
+    }
+    
+    /* ヒーローセクション */
+    .hero {
+      background-color: #f8f8f8;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/api/placeholder/1200/800');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      margin-top: 70px;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .hero h1 span {
+      color: #000;
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    /* サービスセクション */
+    .services {
+      padding: 100px 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    
+    .section-header h2:after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background-color: #000;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .service-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-icon {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 20px;
+    }
+    
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    /* 強みセクション */
+    .strengths {
+      padding: 100px 0;
+      background-color: #f8f8f8;
+    }
+    
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .strength-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .strength-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      line-height: 60px;
+      margin-bottom: 20px;
+    }
+    
+    /* 会社概要セクション */
+    .about {
+      padding: 100px 0;
+    }
+    
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    
+    .about-image {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.8s ease;
+    }
+    
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .about-content p {
+      margin-bottom: 20px;
+    }
+    
+    /* ブログセクション */
+    .blog {
+      padding: 100px 0;
+      background-color: #f8f8f8;
+    }
+    
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .blog-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    
+    .blog-card:hover .blog-image img {
+      transform: scale(1.05);
+    }
+    
+    .blog-content {
+      padding: 20px;
+    }
+    
+    .blog-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .blog-meta {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+    
+    /* 採用情報セクション */
+    .careers {
+      padding: 100px 0;
+    }
+    
+    .careers-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .careers-content p {
+      margin-bottom: 30px;
+    }
+    
+    /* お問い合わせセクション */
+    .contact {
+      padding: 100px 0;
+      background-color: #f8f8f8;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 50px;
+    }
+    
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info p {
+      margin-bottom: 20px;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .contact-form textarea {
+      height: 150px;
+    }
+    
+    /* フッタースタイル */
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 50px 0 20px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h4:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background-color: #fff;
+      bottom: 0;
+      left: 0;
+    }
+    
+    .footer-col ul {
+      list-style: none;
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-col ul li a {
+      color: #ddd;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-col ul li a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* レスポンシブデザイン */
+    @media screen and (max-width: 991px) {
+      .services-grid,
+      .strengths-grid,
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media screen and (max-width: 767px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .services-grid,
+      .strengths-grid,
+      .blog-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <a href="index.html">プロフェッショナル<span>・コンサルティング</span></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#services">サービス</a></li>
+            <li><a href="#strengths">強み</a></li>
+            <li><a href="#about">会社概要</a></li>
+            <li><a href="#blog">ブログ</a></li>
+            <li><a href="#careers">採用情報</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>経営課題を<span>確実に解決する</span><br>プロフェッショナル集団</h1>
+        <p>私たちは、中小企業から大企業まで、さまざまな経営課題に対して最適なソリューションを提供します。実績に裏付けられた確かな専門知識と、クライアント企業への深い理解で、ビジネスの成長をサポートします。</p>
+        <a href="#contact" class="btn">無料相談はこちら</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- サービスセクション -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>サービス</h2>
+        <p>クライアント企業の経営課題を解決するための3つの主要サービス</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>経営戦略コンサルティング</h3>
+          <p>中長期的な企業価値向上に向けた経営戦略の策定から実行支援まで、一貫したサポートを提供します。市場分析、競合分析、事業ポートフォリオ最適化などを通じて、持続的な成長を実現します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>業務改革コンサルティング</h3>
+          <p>業務プロセスの可視化・分析から、効率化・最適化まで、包括的な業務改革を支援します。デジタル技術の活用やワークフロー改善により、生産性向上を実現します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3>デジタルトランスフォーメーション</h3>
+          <p>最新のデジタル技術を活用し、企業のビジネスモデル変革を支援します。データ分析基盤の構築からAI活用まで、デジタル時代の競争力強化をサポートします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 強みセクション -->
+  <section class="strengths" id="strengths">
+    <div class="container">
+      <div class="section-header">
+        <h2>私たちの強み</h2>
+        <p>確かな実績と専門性で、お客様のビジネスを成功に導きます</p>
+      </div>
+      <div class="strengths-grid">
+        <div class="strength-card">
+          <div class="strength-number">1</div>
+          <h3>豊富な実績</h3>
+          <p>500社以上のコンサルティング実績があり、業界・規模を問わず、多様な経営課題を解決してきました。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">2</div>
+          <h3>専門性の高い人材</h3>
+          <p>戦略、財務、IT等の各分野のプロフェッショナルが、横断的にプロジェクトに参画します。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">3</div>
+          <h3>実行力重視</h3>
+          <p>戦略立案だけでなく、実行フェーズまで一貫してサポートし、確実な成果創出を実現します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 会社概要セクション -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>会社概要</h2>
+        <p>信頼と実績を積み重ねてきた私たちの歩み</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="https://placehold.jp/600x400.png" alt="会社外観">
+        </div>
+        <div class="about-content">
+          <h3>株式会社プロフェッショナル・コンサルティング</h3>
+          <p>2005年の設立以来、「企業の持続的成長への貢献」を使命に、経営コンサルティングサービスを提供してきました。</p>
+          <ul>
+            <li>設立：2005年4月</li>
+            <li>資本金：1億円</li>
+            <li>従業員数：120名</li>
+            <li>所在地：東京都千代田区</li>
+          </ul>
+          <a href="#contact" class="btn">詳細を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ブログセクション -->
+  <section class="blog" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2>最新情報</h2>
+        <p>経営に役立つ情報を定期的に発信しています</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-image">
+            <img src="https://placehold.jp/400x300.png" alt="ブログ画像1">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">2024.03.15</div>
+            <h3>DXによる業務効率化の最新トレンド</h3>
+            <p>デジタルトランスフォーメーションを成功させるための重要なポイントをご紹介します。</p>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-image">
+            <img src="https://placehold.jp/400x300.png" alt="ブログ画像2">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">2024.03.10</div>
+            <h3>経営戦略立案のための市場分析手法</h3>
+            <p>効果的な市場分析の方法と、それを経営戦略に活かすポイントを解説します。</p>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-image">
+            <img src="https://placehold.jp/400x300.png" alt="ブログ画像3">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">2024.03.05</div>
+            <h3>人材育成と組織開発の成功事例</h3>
+            <p>企業の成長を支える人材育成と組織開発の実践的なアプローチをご紹介します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 採用情報セクション -->
+  <section class="careers" id="careers">
+    <div class="container">
+      <div class="section-header">
+        <h2>採用情報</h2>
+        <p>共に成長できる仲間を募集しています</p>
+      </div>
+      <div class="careers-content">
+        <p>私たちは、常に新しい価値を創造し、クライアントとともに成長することを目指しています。<br>
+           経営コンサルティングのプロフェッショナルとして活躍したい方、ぜひご応募ください。</p>
+        <a href="#contact" class="btn">採用情報詳細</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせセクション -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>お問い合わせ</h2>
+        <p>まずはお気軽にご相談ください</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>お問い合わせ先</h3>
+          <p>〒100-0001<br>
+             東京都千代田区大手町1-1-1<br>
+             TEL: 03-1234-5678<br>
+             営業時間: 平日 9:00-18:00</p>
+        </div>
+        <div class="contact-form">
+          <form action="#" method="POST">
+            <input type="text" placeholder="お名前" required>
+            <input type="email" placeholder="メールアドレス" required>
+            <input type="text" placeholder="会社名">
+            <textarea placeholder="お問い合わせ内容" required></textarea>
+            <button type="submit" class="btn">送信する</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>会社情報</h4>
+          <ul>
+            <li><a href="#about">会社概要</a></li>
+            <li><a href="#strengths">私たちの強み</a></li>
+            <li><a href="#careers">採用情報</a></li>
+            <li><a href="#contact">アクセス</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="#services">経営戦略コンサルティング</a></li>
+            <li><a href="#services">業務改革コンサルティング</a></li>
+            <li><a href="#services">デジタルトランスフォーメーション</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>リソース</h4>
+          <ul>
+            <li><a href="#blog">ブログ</a></li>
+            <li><a href="#">ケーススタディ</a></li>
+            <li><a href="#">ホワイトペーパー</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="#contact">お問い合わせフォーム</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2024 株式会社プロフェッショナル・コンサルティング All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
